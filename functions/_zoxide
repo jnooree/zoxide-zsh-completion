@@ -24,6 +24,7 @@
 # https://github.com/ajeetdsouza/zoxide/blob/5d8a7ea7b2f41b8cb9eeed05ae3ff56209a3882b/contrib/completions/_zoxide
 
 autoload -U is-at-least
+autoload -Uz __zoxide_list
 
 (($+functions[_zoxide_commands])) ||
 	_zoxide_commands() {
@@ -103,17 +104,6 @@ autoload -U is-at-least
 		commands=()
 		_describe -t commands 'zoxide remove commands' commands "$@"
 	}
-
-__zoxide_list() {
-	local scored_list
-	local -a zoxide_list
-
-	scored_list="$(
-		zoxide query --list --score | sed -E 's/^\s+(\S+)\s+(.*)$/\2:\1/g'
-	)"
-	zoxide_list=("${(@f)scored_list}")
-	_describe -t paths 'zoxide entries' zoxide_list -o nosort
-}
 
 typeset -a _arguments_options
 local ret=1

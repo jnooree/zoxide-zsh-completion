@@ -1,0 +1,5 @@
+#compdef z zi
+
+autoload -Uz __zoxide_list
+
+_arguments ':path:{__zoxide_list; _cd}'
