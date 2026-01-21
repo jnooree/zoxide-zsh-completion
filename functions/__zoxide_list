@@ -2,7 +2,7 @@ local scored_list
 local -a zoxide_list
 
 scored_list="$(
-	zoxide query --list --score | sed -E 's/^\s+(\S+)\s+(.*)$/\2:\1/g'
+	zoxide query --list --score | sed -E 's/^\s*(\S+)\s+(.*)$/\2:\1/g'
 )"
 zoxide_list=("${(@f)scored_list}")
 _describe -t paths 'zoxide entries' zoxide_list -o nosort
